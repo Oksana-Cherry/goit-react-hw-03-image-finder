@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import './Searchbar.scss';
 class Searchbar extends Component {
   state = {
     query: '',
   };
 
-  handleSearchQuery = event => {
+  handleChangeQuery = event => {
     this.setState({ query: event.target.value });
   };
 
-  heandleSendValue = event => {
+  heandleSubmit = event => {
     event.preventDefault();
+    console.log(this.state);
     if (this.state.query !== '') {
-      this.props.onSendQuery(this.state.query);
+      this.props.onSubmit(this.state.query);
       this.setState({ query: '' });
     }
   };
@@ -21,22 +22,22 @@ class Searchbar extends Component {
   render() {
     return (
       <header className="Searchbar">
-        <form className="SearchForm">
+        <form className="SearchForm" onSubmit={this.heandleSubmit}>
           <button
             type="submit"
             className="SearchForm-button"
-            onClick={this.heandleSendValue}
+            onClick={this.heandleSubmit}
           >
             <span className="SearchForm-button-label">Search</span>
           </button>
           <input
-            value={this.state.query}
             className="SearchForm-input"
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
-            onChange={this.handleSearchQuery}
+            value={this.state.query}
+            onChange={this.handleChangeQuery}
           />
         </form>
       </header>
@@ -45,8 +46,8 @@ class Searchbar extends Component {
 }
 
 Searchbar.protoType = {
-  heandleSendValue: PropTypes.func,
-  handleSearchQuery: PropTypes.func,
+  heandleSubmit: PropTypes.func,
+  handleChangeQuery: PropTypes.func,
 };
 
 export default Searchbar;

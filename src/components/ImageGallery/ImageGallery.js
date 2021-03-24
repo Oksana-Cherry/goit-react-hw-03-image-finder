@@ -1,38 +1,34 @@
 import React from 'react';
+import './ImageGallery.scss';
+import '../ImageGalleryItem/ImageGalleryItem.scss';
 
-const ImageGalleryItem = ({ id, webformatURL, tags }) => {
+const ImageGalleryItem = ({
+  id,
+  webformatURL,
+  tags,
+  largeImageURL,
+  onImage,
+}) => {
   return (
-    <li key={id}>
-      <img src={webformatURL} alt={tags} />
+    <li className="ImageGalleryItem" key={id}>
+      <img
+        className="ImageGalleryItem_image"
+        src={webformatURL}
+        alt={tags}
+        onClick={() => onImage(largeImageURL)}
+      />
     </li>
   );
 };
 
-const ImageGallery = ({ images }) => {
+const ImageGallery = ({ images, onImage }) => {
   return (
-    <ul>
+    <ul className="ImageGallery">
       {images.map(image => (
-        <ImageGalleryItem key={image.id} images={images} />
+        <ImageGalleryItem key={image.id} {...image} onImage={onImage} />
       ))}
     </ul>
   );
 };
 
 export default ImageGallery;
-/*const ImageGalleryItem = ({ id }) => {
-  return (
-    <li key={id}>
-      <img src="" alt="" />
-    </li>
-  );
-};
-
-const ImageGallery = ({ images }) => {
-return (
-    <ul>
-      {images.map(image => (
-        <ContactListItem key={image.id} {...image} />
-      ))}
-    </ul>
-  );
-};*/
