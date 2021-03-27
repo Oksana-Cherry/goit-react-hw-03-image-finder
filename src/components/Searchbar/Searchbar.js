@@ -12,7 +12,7 @@ class Searchbar extends Component {
 
   heandleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+    //  console.log(this.state);
     if (this.state.query !== '') {
       this.props.onSubmit(this.state.query);
       this.setState({ query: '' });

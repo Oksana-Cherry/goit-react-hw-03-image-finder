@@ -1,4 +1,6 @@
 import React from 'react';
+import defaultImg from '../ImageGalleryItem/default.jpg';
+import PropTypes from 'prop-types';
 import './ImageGallery.scss';
 import '../ImageGalleryItem/ImageGalleryItem.scss';
 
@@ -30,5 +32,21 @@ const ImageGallery = ({ images, onImage }) => {
     </ul>
   );
 };
+ImageGalleryItem.defaultProps = {
+  images: [],
+  webformatURL: defaultImg,
+  largeImageURL: defaultImg,
+};
+ImageGalleryItem.propTypes = {
+  id: PropTypes.number.isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.exact({
+      webformatURL: PropTypes.string,
+      tags: PropTypes.string,
+      largeImageURL: PropTypes.string,
+    }),
+  ),
 
+  onImage: PropTypes.func,
+};
 export default ImageGallery;

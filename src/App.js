@@ -75,6 +75,7 @@ class App extends Component {
   toggleModal = () => {
     this.setState(({ showModal }) => ({ showModal: !showModal }));
   };
+
   openModal = url => {
     this.setState({
       imageUrl: url,
@@ -97,7 +98,11 @@ class App extends Component {
     return (
       <div className="App">
         <Searchbar onSubmit={this.onChangeQuery} />
-        <ImageGallery images={images} onImage={this.openModal} />
+        <ImageGallery
+          images={images}
+          onImage={this.openModal}
+          onClick={this.deleteImg}
+        />
         {renderLoadMoreBtn && (
           <Button onClick={this.fetchImages} className="Button" />
         )}
